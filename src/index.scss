@@ -1,0 +1,132 @@
+$px-75: 75;
+
+$px-375: 37.5;
+
+$bg-body: #121212;
+$bg-strong: #fbdfaf;
+$bg-active: #fbdfaf;
+$bg-gradual-start: #e8bf8f;
+$bg-gradual-stop: #cc9361;
+
+$color-normal: #999999;
+$color-dark: #e0e0e0;
+$color-light: #666666;
+$color-strong: #e8bf8f;
+$color-active: #e8bf8f;
+$color-error: #f14363;
+
+@function getRem($n) {
+  @return ($n / $px-75) * 1rem;
+}
+
+@function getRem375($n) {
+  @return ($n / $px-375) * 1rem;
+}
+
+@function rem($n) {
+  @return ($n / $px-375) * 1rem;
+}
+
+@mixin flex($flow: row nowrap, $jus: space-between, $ali: center) {
+  display: flex;
+  flex-flow: $flow;
+  justify-content: $jus;
+  align-items: $ali;
+}
+
+@mixin text-ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.vue-scroll {
+  height: 100%;
+  position: relative;
+  overflow-y: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+  .scroll-content {
+    flex: 1 0 auto;
+    box-sizing: content-box;
+    min-height: 100%;
+  }
+
+  .scroll-content {
+    position: relative;
+    .scroll-tips {
+      font-size: rem(12);
+      text-align: center;
+      height: rem(50);
+      @include flex($jus: center);
+
+      .scroll-tips-status {
+        @include flex($jus: center);
+      }
+
+      &.scroll-top-tips {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transform: translateY(-100%);
+        color: #ffffff;
+
+        .status-loading {
+          i {
+            margin-right: rem(6);
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: rotate 1s linear infinite;
+          }
+          span {
+            display: none;
+          }
+        }
+      }
+
+      &.scroll-bottom-tips {
+        color: $color-light;
+        .status-loading,
+        .status-ready {
+          i {
+            margin-right: rem(6);
+            width: rem(16);
+            height: rem(16);
+            background: url(https://g.smartcinema.com.cn/images/a46290488e744c4fb0fabb03bcee5aa7-66-66.png)
+              center no-repeat;
+            background-size: contain;
+            animation: rotate 1s linear infinite;
+            box-sizing: border-box;
+          }
+        }
+        .status-ended {
+          i {
+            margin-right: rem(6);
+            width: rem(16);
+            height: rem(16);
+            background: url(https://g.smartcinema.com.cn/images/bb4d9fca67df4ce98240f3cdbc4c5741-48-48.png)
+              center no-repeat;
+            background-size: contain;
+            box-sizing: border-box;
+          }
+          span {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+}
